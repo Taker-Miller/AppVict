@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Agregar Usuario</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    
+    <div id="verification_code_container" style="display: none;">
+        {{ verification_code_form.as_p }}
+    </div>
+
+    <button type="submit">Agregar Usuario</button>
+</form>
+
+<script>
+    // Script para mostrar el campo de código de verificación si el tipo de usuario es Jefe
+    const userTypeSelect = document.querySelector('select[name="user_type"]');
+    const verificationCodeContainer = document.getElementById('verification_code_container');
+
+    userTypeSelect.addEventListener('change', function() {
+        if (this.value === 'jefe') {
+            verificationCodeContainer.style.display = 'block';
+        } else {
+            verificationCodeContainer.style.display = 'none';
+        }
+    });
+</script>
+
+{% for message in messages %}
+    <div class="message error">{{ message }}</div>
+{% endfor %}
+{% endblock %}

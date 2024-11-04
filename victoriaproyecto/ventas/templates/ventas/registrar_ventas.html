@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Venta</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/registro_venta.css' %}"> <!-- CSS específico para el registro de ventas -->
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                <div class="dropdown">
+                    <button class="dropbtn">Menú</button>
+                    <div class="dropdown-content">
+                        <a href="{% url 'inventario' %}">Inventario</a>
+                        <a href="{% url 'registrar_ventas' %}">Registrar Ventas</a>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="navbar-title">Registrar Venta</h1>
+
+            <div class="navbar-right">
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <a href="{% url 'boss_panel' %}">Inicio</a>  <!-- Redirige a boss_panel si es un jefe -->
+                    {% else %}
+                        <a href="{% url 'employee_panel' %}">Inicio</a>  <!-- Redirige a employee_panel si es un empleado -->
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                {% else %}
+                    <a href="{% url 'login' %}">Iniciar Sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="producto">Producto:</label>
+                <select name="producto" id="producto">
+                    <option value="">----------</option>
+                    {% for producto in productos %}
+                        <option value="{{ producto.id }}">{{ producto.nombre }}</option>
+                    {% endfor %}
+                </select>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" min="1" required>
+
+                <button type="submit">Registrar Venta</button>
+            </form>
+            <a href="{% url 'inventario' %}" class="volver">Volver al Inventario</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Victoria Mix Innova</p>
+    </footer>
+</body>
+</html>

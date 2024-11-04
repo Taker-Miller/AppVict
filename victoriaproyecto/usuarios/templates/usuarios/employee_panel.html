@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/employee-panel.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="employee-panel">
+    <h2 class="panel-title">Panel de Empleado</h2>
+    <p class="panel-description">
+        Bienvenido, {{ user.username }}. Este es tu panel de empleado donde puedes gestionar las operaciones de inventario y registrar ventas de forma eficiente.
+    </p>
+    <ul class="panel-features">
+        <li>Acceder y actualizar el <strong>Inventario</strong>, manteniendo un control preciso de los productos disponibles.</li>
+        <li>Registrar nuevas <strong>Ventas</strong>, facilitando el seguimiento de transacciones y el historial de ventas.</li>
+    </ul>
+    <p class="panel-note">
+        Utiliza el menú de navegación superior para acceder a las secciones de <strong>Inventario</strong> y <strong>Registrar Ventas</strong>.
+    </p>
+</div>
+{% endblock %}

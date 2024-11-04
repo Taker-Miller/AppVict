@@ -1,0 +1,71 @@
+/* Estilos generales para la página de inventario */
+body {
+    background-image: url("/static/images/fondo_inventario.jpg"); /* Ruta absoluta al archivo estático */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-position: center; /* Centra la imagen */
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Título de la página */
+h1 {
+    text-align: center;
+    color: #2c3e50; /* Color oscuro para el título */
+    margin: 20px 0;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 90%; /* Asegura que la tabla ocupe el 90% del ancho de la pantalla */
+    margin: 20px auto; /* Centra la tabla */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Agrega sombra para darle profundidad */
+    background-color: white; /* Fondo blanco para la tabla */
+}
+
+/* Estilo de las celdas de la tabla */
+th, td {
+    padding: 12px; /* Espaciado interno */
+    text-align: left; /* Alineación a la izquierda */
+    border-bottom: 1px solid #ddd; /* Línea separadora entre filas */
+}
+
+/* Estilos para los encabezados de la tabla */
+th {
+    background-color: #6c757d; /* Color gris para el encabezado */
+    color: white; /* Texto blanco para el encabezado */
+}
+
+/* Estilo de las filas al pasar el mouse */
+tr:hover {
+    background-color: #f1f1f1; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilo para el botón de búsqueda y mostrar todo */
+.search-container {
+    display: flex;
+    justify-content: center; /* Centra el contenedor */
+    margin: 20px; /* Margen alrededor del contenedor */
+}
+
+input[type="text"], select {
+    padding: 10px; /* Espaciado interno */
+    margin-right: 10px; /* Espacio entre el input y el botón */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+button {
+    padding: 10px 15px; /* Espaciado interno */
+    background-color: #28a745; /* Color verde para el botón */
+    color: white; /* Texto blanco para el botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+button:hover {
+    background-color: #218838; /* Color más oscuro al pasar el mouse */
+}
