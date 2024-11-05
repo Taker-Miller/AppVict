@@ -1,0 +1,18 @@
+<!-- templates/usuarios/worker_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Lista de Trabajadores</h2>
+<table>
+    <tr>
+        <th>Nombre de Usuario</th>
+        <th>Tipo de Usuario</th>
+    </tr>
+    {% for worker in workers %}
+    <tr>
+        <td>{{ worker.user.username }}</td>
+        <td>{{ worker.get_user_type_display }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

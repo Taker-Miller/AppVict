@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inventario.css' %}"> <!-- Incluye el CSS de inventario -->
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="navbar-left">
+                {% if user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="dropbtn">Menú</button>
+                        <div class="dropdown-content">
+                            <a href="{% url 'inventario' %}">Inventario</a>
+                            <a href="{% url 'registrar_ventas' %}">Registrar Ventas</a>
+                            {% if user.userprofile.user_type == 'jefe' %}
+                                <a href="{% url 'usuarios' %}">Usuarios</a>
+                                <a href="{% url 'reportes' %}">Reportes</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+
+            <h1 class="navbar-title">Inventario Actual</h1>
+
+            <div class="navbar-right">
+                {% if user.is_authenticated %}
+                    {% if user.userprofile.user_type == 'jefe' %}
+                        <a href="{% url 'boss_panel' %}">Inicio</a>
+                    {% else %}
+                        <a href="{% url 'employee_panel' %}">Inicio</a>
+                    {% endif %}
+                    <a href="{% url 'logout' %}">Cerrar Sesión</a>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h1>Inventario Actual</h1>
+        <div class="search-container">
+            <input type="text" placeholder="Buscar...">
+            <select>
+                <option value="all">Mostrar todo</option>
+                <option value="nombre">Buscar por nombre</option>
+                <option value="precio">Buscar por precio</option>
+                <option value="stock">Buscar por stock</option>
+            </select>
+            <button>Buscar</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    {% if user.userprofile.user_type == 'jefe' %}
+                        <th>Acciones</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td><img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" style="width: 50px; height: auto;"></td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ producto.precio }}</td>
+                    <td>{{ producto.stock }}</td>
+                    {% if user.userprofile.user_type == 'jefe' %}
+                        <td>
+                            <a href="{% url 'editar_producto' producto.id %}" class="btn btn-edit">Editar</a>
+                            <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">Eliminar</a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Victoria Mix Innova</p>
+    </footer>
+</body>
+</html>
