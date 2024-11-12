@@ -17,6 +17,11 @@
                     <div class="dropdown-content">
                         <a href="{% url 'inventario' %}">Inventario</a>
                         <a href="{% url 'registrar_ventas' %}">Registrar Ventas</a>
+                        {% if user.userprofile.user_type == 'jefe' %}
+                            <a href="{% url 'listar_ventas' %}">Ventas Registradas</a>
+                            <a href="{% url 'usuarios' %}">Usuarios</a>
+                            <a href="{% url 'reportes' %}">Reportes</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

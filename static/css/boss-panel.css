@@ -39,7 +39,16 @@ body {
     font-weight: bold;
 }
 
-/* Botón del menú */
+.navbar-right a:hover, .dropdown .dropbtn:hover {
+    color: #f4d03f;
+}
+
+/* Dropdown menu styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
 .dropbtn {
     background-color: #3a4b61;
     color: white;
@@ -48,23 +57,8 @@ body {
     border: none;
     cursor: pointer;
     border-radius: 4px;
-    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Botón activo del menú cuando se está en la página de inicio */
-.active-menu .dropbtn {
-    background-color: #28a745; /* Verde para indicar el estado activo */
-    color: white;
-    font-weight: bold;
-}
-
-/* Efecto hover para el botón de menú */
-.dropbtn:hover {
-    background-color: #28a745;
-    color: #f4d03f;
-}
-
-/* Dropdown content */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -110,7 +104,7 @@ footer {
     bottom: 0;
 }
 
-/* Panel Styles */
+/* Employee Panel Styles */
 .employee-panel {
     max-width: 800px;
     margin: 50px auto;
@@ -121,30 +115,11 @@ footer {
     text-align: center;
 }
 
-.panel-container {
-    max-width: 800px;
-    margin: 50px auto;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-}
-
 .panel-title {
     font-size: 28px;
     color: #2c3e50;
     font-weight: bold;
     margin-bottom: 15px;
-}
-
-.panel-description-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: justify;
 }
 
 .panel-description {
@@ -163,12 +138,6 @@ footer {
 
 .panel-features li {
     margin: 8px 0;
-    font-size: 16px;
-    color: #444;
-}
-
-.panel-features strong {
-    color: #2c3e50;
 }
 
 .panel-note {

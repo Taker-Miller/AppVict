@@ -1,7 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/employee-panel.css' %}">
+{% endblock %}
 
 {% block content %}
-<h2>Panel de Jefe</h2>
-<p>Bienvenido, {{ user.username }}. Este es tu panel de jefe.</p>
-<!-- Aquí puedes agregar más funcionalidades específicas para jefes -->
+<div class="employee-panel">
+    <h2 class="panel-title">Panel de Jefe</h2>
+    
+    <!-- Contenedor de la descripción del panel de jefe -->
+    <div class="panel-description-container">
+        <p class="panel-description">
+            Bienvenido, {{ user.username }}. Este es tu panel de jefe donde puedes supervisar y gestionar las operaciones de la empresa, además de acceder a funciones avanzadas de administración.
+        </p>
+    </div>
+    
+    <!-- Lista de funcionalidades del panel de jefe -->
+    <ul class="panel-features">
+        <li>Gestionar el <strong>Inventario</strong>, asegurando que todos los productos estén actualizados y disponibles para la venta.</li>
+        <li>Registrar y supervisar <strong>Ventas</strong> realizadas por el equipo, manteniendo un control detallado del flujo de transacciones.</li>
+        <li>Acceder a la <strong>Gestión de Usuarios</strong> para agregar, modificar o eliminar perfiles de empleados y administrar permisos.</li>
+        <li>Visualizar y generar <strong>Reportes</strong> de ventas e inventario para tomar decisiones informadas.</li>
+    </ul>
+
+    <!-- Nota de instrucciones adicionales -->
+    <p class="panel-note">
+        Utiliza el menú de navegación superior para acceder a las secciones de <strong>Inventario</strong>, <strong>Registrar Ventas</strong>, <strong>Gestión de Usuarios</strong> y <strong>Reportes</strong>.
+    </p>
+</div>
 {% endblock %}

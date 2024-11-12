@@ -17,6 +17,11 @@
                     <div class="dropdown-content">
                         <a href="{% url 'inventario' %}">Inventario</a>
                         <a href="{% url 'registrar_ventas' %}">Registrar Ventas</a>
+                        {% if user.is_authenticated and user.userprofile.user_type == 'jefe' %}
+                            <a href="{% url 'listar_ventas' %}">Ventas Registradas</a>
+                            <a href="{% url 'usuarios' %}">Usuarios</a>
+                            <a href="{% url 'reportes' %}">Reportes</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -25,7 +30,7 @@
 
             <div class="navbar-right">
                 {% if user.is_authenticated %}
-                    {% if user.is_superuser %}
+                    {% if user.userprofile.user_type == 'jefe' %}
                         <a href="{% url 'boss_panel' %}">Inicio</a>  <!-- Redirige a boss_panel si es un jefe -->
                     {% else %}
                         <a href="{% url 'employee_panel' %}">Inicio</a>  <!-- Redirige a employee_panel si es un empleado -->

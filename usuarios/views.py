@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserForm, UserProfileForm, VerificationCodeForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from .models import UserProfile
+from django.contrib.auth.models import User  # Importar el modelo User para listar todos los usuarios
 from django.contrib.auth.decorators import login_required
 
 def add_user(request):
@@ -32,7 +33,7 @@ def add_user(request):
                     })
             
             messages.success(request, 'Usuario agregado exitosamente.')
-            return redirect('user_list')  # Cambia esto a la vista de lista de usuarios o donde desees redirigir.
+            return redirect('usuarios')  # Redirige a la vista de lista de usuarios
 
     else:
         user_form = UserForm()
@@ -94,5 +95,32 @@ def reportes_view(request):
 
 @login_required
 def usuarios_view(request):
-    # Lógica de la vista para la lista de usuarios o gestión de usuarios
-    return render(request, 'usuarios/usuarios.html')
+    # Obtener todos los usuarios que no son superusuarios
+    users = User.objects.filter(is_superuser=False)
+    return render(request, 'usuarios/usuarios.html', {'users': users})
+
+@login_required
+def edit_user(request, user_id):
+    # Obtener el usuario y el perfil a editar
+    user = get_object_or_404(User, pk=user_id, is_superuser=False)
+    profile = get_object_or_404(UserProfile, user=user)
+
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=user)
+        profile_form = UserProfileForm(request.POST, instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Usuario actualizado exitosamente.')
+            return redirect('usuarios')  # Redirigir a la lista de usuarios
+
+    else:
+        user_form = UserForm(instance=user)
+        profile_form = UserProfileForm(instance=profile)
+
+    return render(request, 'usuarios/edit_user.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'user_id': user_id
+    })
